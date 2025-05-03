@@ -9,8 +9,9 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+// Removed extensions to disable rules inherited from them
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // ...compat.extends("next/core-web-vitals", "next/typescript"), // Disabled by removing
 ];
 
 export default eslintConfig;

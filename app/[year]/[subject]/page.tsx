@@ -7,12 +7,12 @@ import ErrorPage from '@/components/reusable/ErrorPage';
 
 
 interface Props {
-    params: { year: string; subject: string };
+    params: Promise<{ year: string; subject: string }>;
 }
 
 
 export default async function VivaListPage({ params }: Props) {
-    const { year, subject } = params;
+    const { year, subject } = await params;
     const { data: vivaList, message } = await getVivas(year, subject);
 
     if (!vivaList || vivaList.length === 0) {

@@ -5,7 +5,7 @@ import ErrorPage from '@/components/reusable/ErrorPage';
 import { LucideIcon, icons } from 'lucide-react';
 
 interface Props {
-  params: { year: string };
+  params: Promise<{ year: string }>;
 }
 
 const getIcon = (iconName?: string): LucideIcon | null => {
@@ -14,8 +14,8 @@ const getIcon = (iconName?: string): LucideIcon | null => {
   return IconComponent || null;
 };
 
-export default function SubjectPage({ params }: Props) {
-  const { year } = params as { year: string };
+export default async function SubjectPage({ params }: Props) {
+  const { year } = await params as { year: string };
 
   const subjects = yearAndSubjects[parseInt(year)];
 
