@@ -36,7 +36,7 @@ export const vivaSchema = z.object({
     }).min(1, {
         message: "College is required.",
     }),
-    date: z.date({
+    date: z.string({
         required_error: "A date is required.",
     }),
 })

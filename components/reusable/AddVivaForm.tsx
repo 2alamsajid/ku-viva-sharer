@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { addViva } from '@/lib/global-actions';
-import { createVivaSchema } from '@/lib/global-types';
+import { createVivaSchema, vivaSchema } from '@/lib/global-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from "react-hook-form";
@@ -23,22 +23,30 @@ export default function AddVivaForm({ year, subject }: Props) {
     const [isAdding, setIsAdding] = useState(false);
     const router = useRouter()
 
-    const form = useForm<z.infer<typeof createVivaSchema>>({
-        resolver: zodResolver(createVivaSchema),
+    const randomId = crypto.randomUUID()
+    const currentDate = new Date()
+
+    const stringDate = currentDate.toDateString()
+
+    const form = useForm<z.infer<typeof vivaSchema>>({
+        resolver: zodResolver(vivaSchema),
         defaultValues: {
+            id: randomId,
             content: "",
             teacherName: "",
             college: "",
-            date: new Date(),
+            date: stringDate,
             year: year,
             subject: subject
         },
     })
+    console.log(form.formState.errors)
 
-    async function onSubmit(values: z.infer<typeof createVivaSchema>) {
+    async function onSubmit(values: z.infer<typeof  vivaSchema>) {
         try {
             setIsAdding(true);
             const { data, message } = await addViva({
+                id: values.id,
                 content: values.content,
                 teacherName: values.teacherName,
                 college: values.college,
@@ -46,6 +54,7 @@ export default function AddVivaForm({ year, subject }: Props) {
                 year: year,
                 subject: subject
             })
+            console.log(data, message)
 
             if (!data) {
                 setIsAdding(false);

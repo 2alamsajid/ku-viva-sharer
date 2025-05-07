@@ -2,8 +2,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getVivas } from '@/lib/global-actions';
 import Link from 'next/link';
-import { TViva } from '@/lib/global-types';
+
 import ErrorPage from '@/components/reusable/ErrorPage';
+import { TViva } from '@/lib/drizzle/schema';
 
 
 interface Props {
@@ -14,6 +15,8 @@ interface Props {
 export default async function VivaListPage({ params }: Props) {
     const { year, subject } = await params;
     const { data: vivaList, message } = await getVivas(year, subject);
+
+    console.log(vivaList)
 
     if (!vivaList || vivaList.length === 0) {
         const errorMessage = message || `No viva questions found for Year ${year} ${subject}.`;
