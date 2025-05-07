@@ -11,7 +11,6 @@ interface Props {
     params: Promise<{ year: string; subject: string }>;
 }
 
-
 export default async function VivaListPage({ params }: Props) {
     const { year, subject } = await params;
     const { data: vivaList, message } = await getVivas(year, subject);

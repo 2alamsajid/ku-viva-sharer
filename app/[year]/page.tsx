@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import Link from 'next/link';
-import { yearAndSubjects } from '@/lib/global-data';
 import ErrorPage from '@/components/reusable/ErrorPage';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { yearAndSubjects } from '@/lib/global-data';
 import { LucideIcon, icons } from 'lucide-react';
+import Link from 'next/link';
 
 interface Props {
   params: Promise<{ year: string }>;
@@ -13,6 +13,8 @@ const getIcon = (iconName?: string): LucideIcon | null => {
   const IconComponent = icons[iconName as keyof typeof icons];
   return IconComponent || null;
 };
+
+
 
 export default async function SubjectPage({ params }: Props) {
   const { year } = await params as { year: string };

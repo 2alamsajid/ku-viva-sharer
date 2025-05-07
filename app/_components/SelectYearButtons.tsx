@@ -8,7 +8,7 @@ export default function SelectYearButtons() {
             {/* Text adjusted for dark theme */}
             <div className="text-center">
                 <h1 className="text-4xl font-bold mb-4 text-white">KU MBBS Viva Sharing</h1> {/* White for main title */}
-                <p className="text-xl text-[#A5A5A5]">Select a year view viva questions</p> {/* Slightly darker light gray for description */}
+                <p className="text-xl text-[#A5A5A5]">Select a year to view viva questions</p> {/* Slightly darker light gray for description */}
             </div>
 
             {/* Stylish and Eye-Catching Buttons */}
