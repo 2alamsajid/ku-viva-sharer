@@ -1,6 +1,9 @@
 import { defineConfig } from "drizzle-kit";
 import 'dotenv/config'
 
+if(!process.env.DATABASE_CA) {
+  throw new Error('No DATABASE_CA environment variable found')
+}
 
 export default defineConfig({
   dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
