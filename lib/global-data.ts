@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { TYearAndSubjects } from "./global-types";
 
 export const yearAndSubjects: TYearAndSubjects = {
@@ -38,3 +39,50 @@ export const yearAndSubjects: TYearAndSubjects = {
         { name: 'orthopedics', displayName: 'Orthopedics', icon: 'Bone' } // Same as Anatomy
     ]
 };
+
+
+
+
+export function constructMetadata({
+    title = "KU Viva Sharer",
+    description = "Viva sharing platform initiated by Batch 2020 Manipal for ease of every MBBS student across the nation",
+    image = "/thumbnail.jpg",
+    icons = "/favicon.ico",
+    noIndex = false
+  }: {
+    title?: string
+    description?: string
+    image?: string
+    icons?: string
+    noIndex?: boolean
+  } = {}): Metadata {
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: [
+          {
+            url: image
+          }
+        ]
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [image],
+        creator: "@c0mrad1_"
+      },
+      icons,
+      metadataBase: new URL('https://ku-viva-sharer.vercel.app/'),
+      ...(noIndex && {
+        robots: {
+          index: false,
+          follow: false
+        }
+      })
+    }
+  }
+  

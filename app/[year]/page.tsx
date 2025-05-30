@@ -1,12 +1,13 @@
 import ErrorPage from '@/components/reusable/ErrorPage';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { yearAndSubjects } from '@/lib/global-data';
+import { constructMetadata, yearAndSubjects } from '@/lib/global-data';
 import { LucideIcon, icons } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
   params: Promise<{ year: string }>;
 }
+
 
 const getIcon = (iconName?: string): LucideIcon | null => {
   if (!iconName) return null;

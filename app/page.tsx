@@ -1,5 +1,8 @@
 import Image from "next/image"; // Keep if you use Image elsewhere, otherwise can remove
 import SelectYearButtons from "./_components/SelectYearButtons";
+import { constructMetadata } from "@/lib/global-data";
+
+export const metadata = constructMetadata()
 
 export default function Home() {
   return (
