@@ -81,3 +81,31 @@ export const getViva = async (id: string): Promise<{ data: TViva | null, message
     return { data: null, message: 'Failed to fetch viva question' };
   }
 }
+
+
+// export async function updateAllVivasCollegeToMCOMS(): Promise<{ success: boolean, message: string }> {
+//   try {
+//     // 1. Fetch all viva entries (optional, but good for verification or if you need to process them before update)
+//     // You could technically skip this select if you only need to update without prior checks.
+//     const allVivasBeforeUpdate: TViva[] = await db.select().from(viva);
+//     console.log(`Found ${allVivasBeforeUpdate.length} vivas before update.`);
+
+//     // 2. Update the college name for all viva entries to 'MCOMS'
+//     // In Drizzle, an update without a `where` clause updates all rows.
+//     const result = await db.update(viva)
+//       .set({ college: 'MCOMS' });
+
+//     // Drizzle's `update` operation returns a result object. The structure might vary slightly
+//     // based on the database driver (e.g., `rowsAffected` or similar property).
+//     // For many drivers, a simple `result` indicates success if no error is thrown.
+//     // Let's assume `result` is non-null/non-empty on success.
+//     console.log("Update operation result:", result);
+
+//     return { success: true, message: 'Successfully updated college name for all vivas to MCOMS.' };
+
+//   } catch (error: any) {
+//     console.error("Error updating vivas college name:", error);
+//     return { success: false, message: `Failed to update college name for all vivas: ${error.message}` };
+//   }
+// }
+

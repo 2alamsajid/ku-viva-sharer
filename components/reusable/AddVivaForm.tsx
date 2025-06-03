@@ -12,6 +12,14 @@ import { toast } from "sonner";
 import * as z from "zod";
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
+import { KU_COLLEGES } from '@/lib/global-data';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 interface Props {
     year: number;
@@ -34,7 +42,7 @@ export default function AddVivaForm({ year, subject }: Props) {
             id: randomId,
             content: "",
             teacherName: "",
-            college: "",
+            college: "MCOMS",
             date: stringDate,
             year: year,
             subject: subject
@@ -42,7 +50,7 @@ export default function AddVivaForm({ year, subject }: Props) {
     })
     console.log(form.formState.errors)
 
-    async function onSubmit(values: z.infer<typeof  vivaSchema>) {
+    async function onSubmit(values: z.infer<typeof vivaSchema>) {
         try {
             setIsAdding(true);
             const { data, message } = await addViva({
@@ -100,7 +108,7 @@ export default function AddVivaForm({ year, subject }: Props) {
                             name="content"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-[#D7DADC]">Content</FormLabel> {/* Styled Label */}
+                                    <FormLabel className="text-[#D7DADC]">Content <span className='text-xs'>(comma seperated)</span></FormLabel> {/* Styled Label */}
                                     <FormControl>
                                         <Textarea
                                             placeholder="Enter viva question content"
@@ -136,15 +144,21 @@ export default function AddVivaForm({ year, subject }: Props) {
                             name="college"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-[#D7DADC]">College</FormLabel> {/* Styled Label */}
+                                    <FormLabel className="text-[#D7DADC]">College</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            placeholder="Enter college name"
-                                            {...field}
-                                            className="bg-[#0B1416] text-[#D7DADC] border border-[#2A2A2A] placeholder:text-[#A5A5A5] focus-visible:ring-[#0079D3]" // Styled Input
-                                        />
+                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <SelectTrigger className="bg-[#0B1416] text-[#D7DADC] border border-[#2A2A2A] focus:ring-[#0079D3]">
+                                                <SelectValue placeholder="Select college" />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-[#1A282D] text-[#D7DADC] border border-[#2A2A2A]">
+                                                {KU_COLLEGES.map((college) => (
+                                                    <SelectItem key={college} value={college} className="hover:bg-[#0B1416]">
+                                                        {college}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
                                     </FormControl>
-
                                     <FormMessage />
                                 </FormItem>
                             )}
